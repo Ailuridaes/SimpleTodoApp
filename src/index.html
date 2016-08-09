@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="app" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Simple Todo App</title>
+
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap.min.css" />
+  <!-- endbower -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- endinject -->
+</head>
+<body ng-controller="TodoController as ctrl">
+  <div class="container">
+    <h1>Simple Todo App</h1>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <form name="todoForm" class="well" ng-submit="todoForm.$valid && ctrl.addTodo()" novalidate>
+          <fieldset>
+            <legend>Add Todo Item</legend>
+            <div class="form-group">
+              <label for="formName">Name</label><input id="formName" ng-model="ctrl.newTodo.name" type="text" class="form-control" placeholder="Todo name" required>
+            </div>
+            <div class="form-group">
+              <label for="formPriority">Priority</label>
+              <select id="formPriority" ng-model="ctrl.newTodo.priority" type="text" class="form-control"
+                ng-options="option.name for option in ctrl.priorityOptions" required>
+                <option value="">Set todo priority</option>
+              </select>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Add Todo" />
+          </fieldset>
+        </form>
+      </div>
+
+      <div class="col-sm-8">
+        <div ng-repeat="todo in ctrl.todoList" class="col-sm-12">
+          <p ng-class="{
+            'bg-danger':todo.priority===ctrl.priorityOptions[0],
+            'bg-warning':todo.priority===ctrl.priorityOptions[1],
+            'bg-success':todo.priority===ctrl.priorityOptions[2],
+            'todo-item':true
+          }">
+            {{todo.name}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- bower:js -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/bootstrap-css/js/bootstrap.min.js"></script>
+  <!-- endbower -->
+  <!-- inject:js -->
+  <script src="js/app.js"></script>
+  <!-- endinject -->
+</body>
+</html>

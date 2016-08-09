@@ -1,0 +1,23 @@
+{
+  "name": "SimpleTodo",
+  "authors": [
+    "Ailuridaes <ailuridaes@gmail.com>"
+  ],
+  "description": "Simple Todo App",
+  "main": "./src/index.html",
+  "license": "none",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "./src/bower_components"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "bootstrap-css": "^3.3.6"
+  }
+}
