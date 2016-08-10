@@ -20,7 +20,9 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-sm-4">
+
+      <!-- New todo form -->
+      <div class="col-md-4">
         <form name="todoForm" class="well" ng-submit="todoForm.$valid && ctrl.addTodo()" novalidate>
           <fieldset>
             <legend>Add Todo Item</legend>
@@ -34,39 +36,53 @@
                 <option value="">Set todo priority</option>
               </select>
             </div>
+            <div class="form-group">
+              <label for="formDesc">Description</label>
+              <textarea id="formDesc" ng-model="ctrl.newTodo.description" type="text" class="form-control"  rows="3" placeholder="Describe your task"></textarea>
+            </div>
             <input type="submit" class="btn btn-primary" value="Add Todo" />
           </fieldset>
         </form>
       </div>
 
-      <div class="col-sm-8">
+      <div class="col-md-8">
+
+        <!-- Sorting buttons -->
         <div class="sort-options container">
           <button ng-class="{
-            'active': sortProperty==='priority.priority',
+            'active': sortProperty==='priority.order',
             'btn': true,
             'btn-primary': true
-            }" ng-click="sortProperty='priority.priority'">Sort by highest priority</button>
+          }" ng-click="sortProperty='priority.order'">Sort by highest priority</button>
           <button ng-class="{
-            'active': sortProperty==='-priority.priority',
+            'active': sortProperty==='-priority.order',
             'btn': true,
             'btn-primary': true
-            }" ng-click="sortProperty='-priority.priority'">Sort by lowest priority</button>
+          }" ng-click="sortProperty='-priority.order'">Sort by lowest priority</button>
           <button ng-class="{
             'active': sortProperty==='name',
             'btn': true,
             'btn-primary': true
             }" ng-click="sortProperty='name'">Sort by name</button>
         </div>
-        <div ng-repeat="todo in ctrl.todoList | orderBy:sortProperty" class="col-sm-12">
+
+        <!-- Todo items -->
+        <div ng-repeat="todo in ctrl.todoList | orderBy:sortProperty" class="col-sm-12 todo-item">
           <p ng-class="{
             'bg-danger':todo.priority===ctrl.priorityOptions[0],
             'bg-warning':todo.priority===ctrl.priorityOptions[1],
             'bg-success':todo.priority===ctrl.priorityOptions[2],
-            'todo-item':true
-          }">
+            'todo-name-expanded':todo.isExpanded,
+            'todo-name':true
+          }" ng-click="todo.isExpanded = !todo.isExpanded">
             {{todo.name}}<button type="button" class="close pull-right" ng-click="ctrl.removeTodo(todo)" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           </p>
+          <div class="todo-expand" ng-show="todo.isExpanded">
+            <p ng-show="todo.description.length">{{todo.description}}</p>
+            <p class="todo-priority">This task is a {{todo.priority.name | lowercase}} priority.</p>
+          </div>
         </div>
+
       </div>
     </div>
   </div>
