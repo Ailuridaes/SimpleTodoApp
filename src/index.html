@@ -41,9 +41,21 @@
 
       <div class="col-sm-8">
         <div class="sort-options container">
-          <button class="sort-option btn btn-primary" ng-click="sortProperty='priority.priority'">Sort by highest priority</button>
-          <button class="sort-option btn btn-primary" ng-click="sortProperty='-priority.priority'">Sort by lowest priority</button>
-          <button class="sort-option btn btn-primary" ng-click="sortProperty='name'">Sort by name</button>
+          <button ng-class="{
+            'active': sortProperty==='priority.priority',
+            'btn': true,
+            'btn-primary': true
+            }" ng-click="sortProperty='priority.priority'">Sort by highest priority</button>
+          <button ng-class="{
+            'active': sortProperty==='-priority.priority',
+            'btn': true,
+            'btn-primary': true
+            }" ng-click="sortProperty='-priority.priority'">Sort by lowest priority</button>
+          <button ng-class="{
+            'active': sortProperty==='name',
+            'btn': true,
+            'btn-primary': true
+            }" ng-click="sortProperty='name'">Sort by name</button>
         </div>
         <div ng-repeat="todo in ctrl.todoList | orderBy:sortProperty" class="col-sm-12">
           <p ng-class="{
