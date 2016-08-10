@@ -4,6 +4,7 @@
   app.controller('TodoController', function(){
     var ctrl = this;
     ctrl.todoList = [];
+
     ctrl.priorityOptions = [
       {name: "High",
       priority: 1},
@@ -18,7 +19,7 @@
     ctrl.addTodo = function() {
       ctrl.todoList.push(ctrl.newTodo);
       ctrl.newTodo = {};
-    }
+    };
   });
 
 })();

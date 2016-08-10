@@ -40,7 +40,12 @@
       </div>
 
       <div class="col-sm-8">
-        <div ng-repeat="todo in ctrl.todoList" class="col-sm-12">
+        <div class="sort-options container">
+          <button class="sort-option btn btn-primary" ng-click="sortProperty='priority.priority'">Sort by highest priority</button>
+          <button class="sort-option btn btn-primary" ng-click="sortProperty='-priority.priority'">Sort by lowest priority</button>
+          <button class="sort-option btn btn-primary" ng-click="sortProperty='name'">Sort by name</button>
+        </div>
+        <div ng-repeat="todo in ctrl.todoList | orderBy:sortProperty" class="col-sm-12">
           <p ng-class="{
             'bg-danger':todo.priority===ctrl.priorityOptions[0],
             'bg-warning':todo.priority===ctrl.priorityOptions[1],
