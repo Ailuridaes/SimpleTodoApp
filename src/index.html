@@ -64,7 +64,7 @@
             'bg-success':todo.priority===ctrl.priorityOptions[2],
             'todo-item':true
           }">
-            {{todo.name}}
+            {{todo.name}}<button type="button" class="close pull-right" ng-click="ctrl.removeTodo(todo)" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           </p>
         </div>
       </div>

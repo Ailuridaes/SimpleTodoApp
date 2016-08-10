@@ -20,6 +20,11 @@
       ctrl.todoList.push(ctrl.newTodo);
       ctrl.newTodo = {};
     };
+
+    ctrl.removeTodo = function(todo) {
+      var index = ctrl.todoList.indexOf(todo);
+      return index>-1 ? ctrl.todoList.splice(index, 1) : [];
+    }
   });
 
 })();
