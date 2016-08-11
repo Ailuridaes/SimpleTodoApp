@@ -2,9 +2,14 @@ h1 {
   margin-bottom: 1.75em;
 }
 
+.sort-options {
+  margin-bottom: 1.5em;
+}
+
 .todo-item {
   padding: 0;
   margin-bottom: .66em;
+  display: block;
 }
 
 .todo-name {
@@ -32,6 +37,12 @@ h1 {
   margin-bottom: 0;
 }
 
-.sort-options {
-  margin-bottom: 1.5em;
+.glyphicon  {
+  padding-right: .66em;
+  line-height: 1.25em;
+}
+
+.as-sortable-placeholder {
+  margin-bottom: .66em;
+  display: inline-block !important;
 }

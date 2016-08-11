@@ -8,6 +8,7 @@
 
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="bower_components/ng-sortable/dist/ng-sortable.css" />
   <!-- endbower -->
   <!-- inject:css -->
   <link rel="stylesheet" href="css/style.css">
@@ -67,21 +68,25 @@
         </div>
 
         <!-- Todo items -->
-        <div ng-repeat="todo in ctrl.todoList | orderBy:sortProperty" class="col-sm-12 todo-item">
-          <p ng-class="{
-            'bg-danger':todo.priority===ctrl.priorityOptions[0],
-            'bg-warning':todo.priority===ctrl.priorityOptions[1],
-            'bg-success':todo.priority===ctrl.priorityOptions[2],
-            'todo-name-expanded':todo.isExpanded,
-            'todo-name':true
-          }" ng-click="todo.isExpanded = !todo.isExpanded">
-            {{todo.name}}<button type="button" class="close pull-right" ng-click="ctrl.removeTodo(todo)" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          </p>
-          <div class="todo-expand" ng-show="todo.isExpanded">
-            <p ng-show="todo.description.length">{{todo.description}}</p>
-            <p class="todo-priority">This task is a {{todo.priority.name | lowercase}} priority.</p>
-          </div>
-        </div>
+        <ul id="#todoList" class="list-unstyled" data-as-sortable="ctrl.dragControlOptions" data-ng-model="ctrl.todoList">
+          <li data-ng-repeat="todo in ctrl.todoList | orderBy:sortProperty" class="col-sm-12 todo-item" data-as-sortable-item>
+            <div ng-class="{
+              'bg-danger':todo.priority===ctrl.priorityOptions[0],
+              'bg-warning':todo.priority===ctrl.priorityOptions[1],
+              'bg-success':todo.priority===ctrl.priorityOptions[2],
+              'todo-name-expanded':todo.isExpanded,
+              'todo-name':true
+              }" ng-click="todo.isExpanded = !todo.isExpanded">
+              <span data-as-sortable-item-handle class="glyphicon glyphicon-menu-hamburger pull-left" aria-hidden="true"></span>
+              {{todo.name}}
+              <button type="button" class="close pull-right" ng-click="ctrl.removeTodo(todo)" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="todo-expand" ng-show="todo.isExpanded">
+              <p ng-show="todo.description.length">{{todo.description}}</p>
+              <p class="todo-priority">This task is a {{todo.priority.name | lowercase}} priority.</p>
+            </div>
+          </li>
+        </ul>
 
       </div>
     </div>
@@ -90,6 +95,7 @@
   <!-- bower:js -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/bootstrap-css/js/bootstrap.min.js"></script>
+  <script src="bower_components/ng-sortable/dist/ng-sortable.js"></script>
   <!-- endbower -->
   <!-- inject:js -->
   <script src="js/app.js"></script>
