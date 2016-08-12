@@ -1,0 +1,35 @@
+[{
+    "name": "Turn on the lights",
+    "priority": {
+        "name": "High",
+        "order": 1
+    },
+    "description": "Gideon is afraid of the dark!"
+}, {
+    "name": "Clean the sink",
+    "priority": {
+        "name": "Medium",
+        "order": 2
+    },
+    "description": "It's kind of gross"
+}, {
+    "name": "Vaccuum",
+    "priority": {
+        "name": "Low",
+        "order": 3
+    },
+    "description": ""
+}, {
+    "name": "Take out the trash",
+    "priority": {
+        "name": "Medium",
+        "order": 2
+    },
+    "description": "Helena can do the recycling"
+}, {
+    "name": "Cook dinner",
+    "priority": {
+        "name": "Low",
+        "order": 3
+    }
+}]

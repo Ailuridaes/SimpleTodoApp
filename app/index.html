@@ -71,9 +71,9 @@
         <ul id="#todoList" class="list-unstyled" data-as-sortable="ctrl.dragControlOptions" data-ng-model="ctrl.todoList">
           <li data-ng-repeat="todo in ctrl.todoList | orderBy:sortProperty" class="col-sm-12 todo-item" data-as-sortable-item>
             <div ng-class="{
-              'bg-danger':todo.priority===ctrl.priorityOptions[0],
-              'bg-warning':todo.priority===ctrl.priorityOptions[1],
-              'bg-success':todo.priority===ctrl.priorityOptions[2],
+              'bg-danger':todo.priority.name===ctrl.priorityOptions[0].name,
+              'bg-warning':todo.priority.name===ctrl.priorityOptions[1].name,
+              'bg-success':todo.priority.name===ctrl.priorityOptions[2].name,
               'todo-name-expanded':todo.isExpanded,
               'todo-name':true
               }" ng-click="todo.isExpanded = !todo.isExpanded">
@@ -99,6 +99,8 @@
   <!-- endbower -->
   <!-- inject:js -->
   <script src="js/app.js"></script>
+  <script src="js/todoController.js"></script>
+  <script src="js/todoFactory.js"></script>
   <!-- endinject -->
 </body>
 </html>
