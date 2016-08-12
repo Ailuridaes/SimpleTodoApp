@@ -54,22 +54,22 @@
             'active': sortProperty==='priority.order',
             'btn': true,
             'btn-primary': true
-          }" ng-click="sortProperty='priority.order'">Sort by highest priority</button>
+          }" ng-click="ctrl.orderTodos('priority.order')">Sort by highest priority</button>
           <button ng-class="{
             'active': sortProperty==='-priority.order',
             'btn': true,
             'btn-primary': true
-          }" ng-click="sortProperty='-priority.order'">Sort by lowest priority</button>
+          }" ng-click="ctrl.orderTodos('-priority.order')">Sort by lowest priority</button>
           <button ng-class="{
             'active': sortProperty==='name',
             'btn': true,
             'btn-primary': true
-            }" ng-click="sortProperty='name'">Sort by name</button>
+          }" ng-click="ctrl.orderTodos('name')">Sort by name</button>
         </div>
 
         <!-- Todo items -->
         <ul id="#todoList" class="list-unstyled" data-as-sortable="ctrl.dragControlOptions" data-ng-model="ctrl.todoList">
-          <li data-ng-repeat="todo in ctrl.todoList | orderBy:sortProperty" class="col-sm-12 todo-item" data-as-sortable-item>
+          <li data-ng-repeat="todo in ctrl.todoList" class="col-sm-12 todo-item" data-as-sortable-item>
             <div ng-class="{
               'bg-danger':todo.priority.name===ctrl.priorityOptions[0].name,
               'bg-warning':todo.priority.name===ctrl.priorityOptions[1].name,

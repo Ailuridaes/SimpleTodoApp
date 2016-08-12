@@ -1,35 +1,21 @@
 [{
-    "name": "Turn on the lights",
+    "name": "Add a new task!",
     "priority": {
         "name": "High",
         "order": 1
     },
-    "description": "Gideon is afraid of the dark!"
+    "description": "Fill out the \"Add Todo Item\" form to add a new todo"
 }, {
-    "name": "Clean the sink",
-    "priority": {
-        "name": "Medium",
-        "order": 2
-    },
-    "description": "It's kind of gross"
-}, {
-    "name": "Vaccuum",
+    "name": "Click a todo to expand",
     "priority": {
         "name": "Low",
         "order": 3
     },
-    "description": ""
+    "description": "There can be more text inside!"
 }, {
-    "name": "Take out the trash",
+    "name": "Click the \"x\" to delete a todo",
     "priority": {
         "name": "Medium",
         "order": 2
-    },
-    "description": "Helena can do the recycling"
-}, {
-    "name": "Cook dinner",
-    "priority": {
-        "name": "Low",
-        "order": 3
     }
 }]
