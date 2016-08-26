@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/style.css">
   <!-- endinject -->
 </head>
-<body ng-controller="TodoController as ctrl">
+<body ng-controller="TaskController as ctrl">
   <div class="container">
     <h1>Simple Todo App</h1>
   </div>
@@ -22,26 +22,26 @@
   <div class="container">
     <div class="row">
 
-      <!-- New todo form -->
+      <!-- New task form -->
       <div class="col-md-4">
-        <form name="todoForm" class="well" ng-submit="todoForm.$valid && ctrl.addTodo()" novalidate>
+        <form name="taskForm" class="well" ng-submit="taskForm.$valid && ctrl.addTask()" novalidate>
           <fieldset>
-            <legend>Add Todo Item</legend>
+            <legend>Add Task Item</legend>
             <div class="form-group">
-              <label for="formName">Name</label><input id="formName" ng-model="ctrl.newTodo.name" type="text" class="form-control" placeholder="Todo name" required>
+              <label for="formName">Name</label><input id="formName" ng-model="ctrl.newTask.name" type="text" class="form-control" placeholder="Task name" required>
             </div>
             <div class="form-group">
               <label for="formPriority">Priority</label>
-              <select id="formPriority" ng-model="ctrl.newTodo.priority" type="text" class="form-control"
+              <select id="formPriority" ng-model="ctrl.newTask.priority" type="text" class="form-control"
                 ng-options="option.name for option in ctrl.priorityOptions" required>
-                <option value="">Set todo priority</option>
+                <option value="">Set task priority</option>
               </select>
             </div>
             <div class="form-group">
               <label for="formDesc">Description</label>
-              <textarea id="formDesc" ng-model="ctrl.newTodo.description" type="text" class="form-control"  rows="3" placeholder="Describe your task"></textarea>
+              <textarea id="formDesc" ng-model="ctrl.newTask.description" type="text" class="form-control"  rows="3" placeholder="Describe your task"></textarea>
             </div>
-            <input type="submit" class="btn btn-primary" value="Add Todo" />
+            <input type="submit" class="btn btn-primary" value="Add Task" />
           </fieldset>
         </form>
       </div>
@@ -51,39 +51,39 @@
         <!-- Sorting buttons -->
         <div class="sort-options container">
           <button ng-class="{
-            'active': sortProperty==='priority.order',
+            'active': sortProperty==='priority',
             'btn': true,
             'btn-primary': true
-          }" ng-click="ctrl.orderTodos('priority.order')">Sort by highest priority</button>
+          }" ng-click="ctrl.orderTasks('priority')">Sort by highest priority</button>
           <button ng-class="{
-            'active': sortProperty==='-priority.order',
+            'active': sortProperty==='-priority',
             'btn': true,
             'btn-primary': true
-          }" ng-click="ctrl.orderTodos('-priority.order')">Sort by lowest priority</button>
+          }" ng-click="ctrl.orderTasks('-priority')">Sort by lowest priority</button>
           <button ng-class="{
             'active': sortProperty==='name',
             'btn': true,
             'btn-primary': true
-          }" ng-click="ctrl.orderTodos('name')">Sort by name</button>
+          }" ng-click="ctrl.orderTasks('name')">Sort by name</button>
         </div>
 
-        <!-- Todo items -->
-        <ul id="#todoList" class="list-unstyled" data-as-sortable="ctrl.dragControlOptions" data-ng-model="ctrl.todoList">
-          <li data-ng-repeat="todo in ctrl.todoList" class="col-sm-12 todo-item" data-as-sortable-item>
+        <!-- Task items -->
+        <ul id="#taskList" class="list-unstyled" data-as-sortable="ctrl.dragControlOptions" data-ng-model="ctrl.taskList">
+          <li data-ng-repeat="task in ctrl.taskList" class="col-sm-12 task-item" data-as-sortable-item>
             <div ng-class="{
-              'bg-danger':todo.priority.name===ctrl.priorityOptions[0].name,
-              'bg-warning':todo.priority.name===ctrl.priorityOptions[1].name,
-              'bg-success':todo.priority.name===ctrl.priorityOptions[2].name,
-              'todo-name-expanded':todo.isExpanded,
-              'todo-name':true
-              }" ng-click="todo.isExpanded = !todo.isExpanded">
+              'bg-danger':task.priority===0,
+              'bg-warning':task.priority===1,
+              'bg-success':task.priority===2,
+              'task-name-expanded':task.isExpanded,
+              'task-name':true
+              }" ng-click="task.isExpanded = !task.isExpanded">
               <span data-as-sortable-item-handle class="glyphicon glyphicon-menu-hamburger pull-left" aria-hidden="true"></span>
-              {{todo.name}}
-              <button type="button" class="close pull-right" ng-click="ctrl.removeTodo(todo)" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              {{task.name}}
+              <button type="button" class="close pull-right" ng-click="ctrl.removeTask(task)" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
-            <div class="todo-expand" ng-show="todo.isExpanded">
-              <p ng-show="todo.description.length">{{todo.description}}</p>
-              <p class="todo-priority">This task is a {{todo.priority.name | lowercase}} priority.</p>
+            <div class="task-expand" ng-show="task.isExpanded">
+              <p ng-show="task.description.length">{{task.description}}</p>
+              <p class="task-priority">This task is a {{ctrl.priorityOptions[task.priority] | lowercase}} priority.</p>
             </div>
           </li>
         </ul>
@@ -99,8 +99,8 @@
   <!-- endbower -->
   <!-- inject:js -->
   <script src="js/app.js"></script>
-  <script src="js/todoController.js"></script>
-  <script src="js/todoFactory.js"></script>
+  <script src="js/task.controller.js"></script>
+  <script src="js/task.factory.js"></script>
   <!-- endinject -->
 </body>
 </html>
