@@ -28,7 +28,8 @@
           <fieldset>
             <legend>Add Task Item</legend>
             <div class="form-group">
-              <label for="formName">Name</label><input id="formName" ng-model="ctrl.newTask.name" type="text" class="form-control" placeholder="Task name" required>
+              <label for="formName">Name</label>
+              <input id="formName" ng-model="ctrl.newTask.name" type="text" class="form-control" placeholder="Task name" required>
             </div>
             <div class="form-group">
               <label for="formPriority">Priority</label>
@@ -68,22 +69,41 @@
         </div>
 
         <!-- Task items -->
-        <ul id="#taskList" class="list-unstyled" data-as-sortable="ctrl.dragControlOptions" data-ng-model="ctrl.taskList">
+        <ul id="taskList" class="list-unstyled" data-as-sortable="ctrl.dragControlOptions" data-ng-model="ctrl.taskList">
           <li data-ng-repeat="task in ctrl.taskList" class="col-sm-12 task-item" data-as-sortable-item>
             <div ng-class="{
               'bg-danger':task.priority===0,
               'bg-warning':task.priority===1,
               'bg-success':task.priority===2,
-              'task-name-expanded':task.isExpanded,
+              'task-name-expanded':task.isExpanded ||  task.isEditMode,
               'task-name':true
               }" ng-click="task.isExpanded = !task.isExpanded">
               <span data-as-sortable-item-handle class="glyphicon glyphicon-menu-hamburger pull-left" aria-hidden="true"></span>
-              {{task.name}}
-              <button type="button" class="close pull-right" ng-click="ctrl.removeTask(task)" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <span ng-hide="task.isEditMode">{{task.name}}</span>
+              <input ng-show="task.isEditMode" ng-model="task.name" type="text" required>
+              <!-- Delete button -->
+              <span type="button" class="glyphicon glyphicon-trash clickable pull-right" ng-click="ctrl.removeTask(task)" aria-label="Delete"></span>
+              <!-- Edit button -->
+              <span type="button" class="glyphicon glyphicon-pencil clickable pull-right"
+                ng-click="task.isEditMode = true"
+                ng-hide="task.isEditMode"
+                aria-label="Edit"></span>
+              <!-- Save button -->
+              <span type="button" class="glyphicon glyphicon-floppy-disk clickable pull-right"
+                ng-show="task.isEditMode && task.name.length"
+                ng-click="ctrl.updateTask(task); task.isEditMode = false"
+                aria-label="Save"></span>
             </div>
-            <div class="task-expand" ng-show="task.isExpanded">
-              <p ng-show="task.description.length">{{task.description}}</p>
-              <p class="task-priority">This task is a {{ctrl.priorityOptions[task.priority] | lowercase}} priority.</p>
+            <div class="task-expand" ng-show="task.isExpanded || task.isEditMode">
+              <p ng-show="task.description.length && !task.isEditMode">{{task.description}}</p>
+              <p class="task-priority" ng-hide="task.isEditMode">This task is a {{ctrl.priorityOptions[task.priority] | lowercase}} priority.</p>
+              <!-- Edit mode -->
+              <textarea ng-show="task.isEditMode" ng-model="task.description" type="text" class="form-control"  rows="2"></textarea>
+              <p class="task-priority" ng-show="task.isEditMode">This task is a
+                <select ng-model="task.priority" type="text"
+                  ng-options="index*1 as option for (index, option) in ctrl.priorityOptions track by index">
+                </select>
+                priority.</p>
             </div>
           </li>
         </ul>

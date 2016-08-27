@@ -12,7 +12,8 @@
         var service = {
             getTasks: getTasks($http),
             addTask: addTask,
-            deleteTask: deleteTask
+            deleteTask: deleteTask,
+            updateTask: updateTask
         };
 
         return service;
@@ -57,6 +58,22 @@
                 }, function(res) {
                     return res.statusText;
                     // res is 404 Not Found if taskId does not exist
+                }
+            );
+        }
+
+        function updateTask(task) {
+            return $http({
+                method: 'PUT',
+                url: taskUrl + "/" + task.taskId,
+                data: task
+            }).then(
+                function(res) {
+                    // returns deleted task
+                    return;
+                }, function(res) {
+                    return res.statusText;
+                    // res is 404 Not Found if taskId does not exist, Bad Request if invalid task
                 }
             );
         }

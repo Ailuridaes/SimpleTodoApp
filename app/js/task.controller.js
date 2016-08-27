@@ -9,6 +9,7 @@
         ctrl.newTask = {};
         ctrl.addTask = addTask;
         ctrl.removeTask = removeTask;
+        ctrl.updateTask = updateTask;
         ctrl.orderTasks = orderTasks;
         ctrl.priorityOptions = ["High", "Medium", "Low"];
 
@@ -34,7 +35,7 @@
                     //TODO: add error message
                 }
             );
-        };
+        }
 
         function removeTask(task) {
             taskFactory.deleteTask(task).then(
@@ -45,8 +46,16 @@
                 function(error) {
                     //TODO: add error handling
                 }
-            )
-        };
+            );
+        }
+
+        function updateTask(task){
+            taskFactory.updateTask(task).then(
+                function(res){
+                    return;
+                }
+            );
+        }
 
         function orderTasks(sortOption) {
             ctrl.taskList = $filter('orderBy')(ctrl.taskList, sortOption);
