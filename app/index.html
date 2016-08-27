@@ -24,7 +24,7 @@
 
       <!-- New task form -->
       <div class="col-md-4">
-        <form name="taskForm" class="well" ng-submit="taskForm.$valid && ctrl.addTask()" novalidate>
+        <form name="taskForm" class="well" ng-submit="taskForm.$valid && ctrl.addTask(ctrl.newTask); ctrl.newTask = {}" novalidate>
           <fieldset>
             <legend>Add Task Item</legend>
             <div class="form-group">
@@ -33,7 +33,7 @@
             <div class="form-group">
               <label for="formPriority">Priority</label>
               <select id="formPriority" ng-model="ctrl.newTask.priority" type="text" class="form-control"
-                ng-options="option.name for option in ctrl.priorityOptions" required>
+                ng-options="index*1 as option for (index, option) in ctrl.priorityOptions track by index" required>
                 <option value="">Set task priority</option>
               </select>
             </div>
