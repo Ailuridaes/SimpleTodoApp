@@ -5,13 +5,14 @@
         .module('app')
         .factory('taskFactory', taskFactory);
 
-    taskFactory.$inject = ['$http'];
+    taskFactory.$inject = ['$http', 'taskUrl'];
 
     /* @ngInject */
-    function taskFactory($http) {
+    function taskFactory($http, taskUrl) {
         var service = {
             getTasks: getTasks($http),
-            addTask: addTask
+            addTask: addTask,
+            deleteTask: deleteTask
         };
 
         return service;
@@ -19,12 +20,12 @@
         function getTasks($http) {
             return $http({
                 method: 'GET',
-                url: "http://localhost:50934/api/tasks"
+                url: taskUrl
             }).then(
                 function(res) {
                     return res.data;
                 }, function(res) {
-                    return res;
+                    return res.statusText;
                 }
             );
         }
@@ -32,13 +33,30 @@
         function addTask(task) {
             return $http({
                 method: 'POST',
-                url: "http://localhost:50934/api/tasks",
+                url: taskUrl,
                 data: task
             }).then(
                 function(res) {
+                    // returns added task
                     return angular.fromJson(res.data);
                 }, function(res) {
-                    return res;
+                    return res.data.message;
+                    // has data.message AND res.statusText on 405 (not allowed)
+                }
+            );
+        }
+
+        function deleteTask(task) {
+            return $http({
+                method: 'DELETE',
+                url: taskUrl + "/" + task.taskId
+            }).then(
+                function(res) {
+                    // returns deleted task
+                    return angular.fromJson(res.data);
+                }, function(res) {
+                    return res.statusText;
+                    // res is 404 Not Found if taskId does not exist
                 }
             );
         }

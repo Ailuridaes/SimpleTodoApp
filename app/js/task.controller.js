@@ -19,7 +19,7 @@
                 function(data) {
                     ctrl.taskList = data;
                 },
-                function(response) {
+                function(responseMsg) {
                     //TODO: add error message
                 }
             );
@@ -30,15 +30,22 @@
                 function(task) {
                     ctrl.taskList.push(task);
                 },
-                function(error) {
+                function(errorMsg) {
                     //TODO: add error message
                 }
             );
         };
 
         function removeTask(task) {
-            var index = ctrl.taskList.indexOf(task);
-            return index > -1 ? ctrl.taskList.splice(index, 1) : [];
+            taskFactory.deleteTask(task).then(
+                function(res) {
+                    var index = ctrl.taskList.indexOf(task);
+                    return index > -1 ? ctrl.taskList.splice(index, 1) : [];
+                },
+                function(error) {
+                    //TODO: add error handling
+                }
+            )
         };
 
         function orderTasks(sortOption) {
