@@ -39,15 +39,17 @@
         }
 
         function removeTask(task) {
-            taskFactory.deleteTask(task).then(
-                function(res) {
-                    var index = ctrl.taskList.indexOf(task);
-                    return index > -1 ? ctrl.taskList.splice(index, 1) : [];
-                },
-                function(error) {
-                    //TODO: add error handling
-                }
-            );
+            if (confirm("Are you sure you want to delete this task?")) {
+                taskFactory.deleteTask(task).then(
+                    function(res) {
+                        var index = ctrl.taskList.indexOf(task);
+                        return index > -1 ? ctrl.taskList.splice(index, 1) : [];
+                    },
+                    function(error) {
+                        //TODO: add error handling
+                    }
+                );
+            }
         }
 
         function updateTask(task){

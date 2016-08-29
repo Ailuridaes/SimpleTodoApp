@@ -71,14 +71,16 @@
         <!-- Task items -->
         <ul id="taskList" class="list-unstyled" data-as-sortable="ctrl.dragControlOptions" data-ng-model="ctrl.taskList">
           <li data-ng-repeat="task in ctrl.taskList" ng-class="['col-sm-12', 'task-item', {'task-completed': task.isCompleted}]" data-as-sortable-item>
-            <div ng-class="['task-name', {
+            <div ng-class="['task-title', {
               'bg-danger':task.priority===0,
               'bg-warning':task.priority===1,
               'bg-success':task.priority===2,
-              'task-name-expanded':task.isExpanded ||  task.isEditMode
-              }]" ng-click="task.isExpanded = !task.isExpanded">
+              'task-title-expanded':task.isExpanded ||  task.isEditMode
+              }]">
               <span data-as-sortable-item-handle class="glyphicon glyphicon-menu-hamburger pull-left" aria-hidden="true"></span>
-              <span ng-hide="task.isEditMode">{{task.name}}</span>
+              <span ng-hide="task.isEditMode" ng-click="task.isExpanded = !task.isExpanded">
+                {{task.name}}
+              </span>
               <input ng-show="task.isEditMode" ng-model="task.name" type="text" required>
               <!-- Complete button -->
               <span type="button" class="glyphicon glyphicon-ok clickable pull-right" ng-hide="task.isCompleted" ng-click="ctrl.completeTask(task)" aria-label="Complete"></span>
