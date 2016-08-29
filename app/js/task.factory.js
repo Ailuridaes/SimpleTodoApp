@@ -66,10 +66,12 @@
             return $http({
                 method: 'PUT',
                 url: taskUrl + "/" + task.taskId,
+                headers: {
+                  'Accept': 'application/json'
+                },
                 data: task
             }).then(
                 function(res) {
-                    // returns deleted task
                     return;
                 }, function(res) {
                     return res.statusText;

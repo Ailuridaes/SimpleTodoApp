@@ -1,15 +1,16 @@
 (function() {
     angular.module('app').controller('TaskController', TaskController);
 
-    TaskController.$inject = ['taskFactory', '$filter'];
+    TaskController.$inject = ['taskFactory', '$filter', '$q'];
 
-    function TaskController(taskFactory, $filter) {
+    function TaskController(taskFactory, $filter, $q) {
         var ctrl = this;
         ctrl.taskList = [];
         ctrl.newTask = {};
         ctrl.addTask = addTask;
         ctrl.removeTask = removeTask;
         ctrl.updateTask = updateTask;
+        ctrl.completeTask = completeTask;
         ctrl.orderTasks = orderTasks;
         ctrl.priorityOptions = ["High", "Medium", "Low"];
 
@@ -50,9 +51,27 @@
         }
 
         function updateTask(task){
+            var defer = $q.defer();
+
             taskFactory.updateTask(task).then(
                 function(res){
+                    defer.resolve(res);
+                }, function(error) {
+                    console.log(error);
+                    defer.reject(error);
+                }
+            );
+
+            return defer.promise;
+        }
+
+        function completeTask(task, isIncomplete) {
+            task.isCompleted = !isIncomplete;
+            updateTask(task).then(
+                function() {
                     return;
+                }, function(error) {
+                    task.isCompleted = isIncomplete;
                 }
             );
         }

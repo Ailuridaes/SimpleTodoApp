@@ -6,6 +6,13 @@ h1 {
   margin-bottom: 1.5em;
 }
 
+.clickable {
+  cursor: pointer;
+  padding-left: .5em;
+}
+
+
+/*task list*/
 .task-item {
   padding: 0;
   margin-bottom: .66em;
@@ -42,10 +49,15 @@ h1 {
   line-height: 1.25em;
 }
 
-.clickable {
-  cursor: pointer;
-  padding-left: .5em;
+.task-completed {
+  text-decoration: line-through;
 }
+
+.task-completed .task-name {
+  background-color: #DDD;
+  color: #666;
+}
+
 
 /*edit task mode*/
 .task-item input, .task-item select {
