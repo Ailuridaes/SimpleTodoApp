@@ -17,7 +17,7 @@
         activate();
 
         function activate() {
-            taskFactory.getTasks.then(
+            taskFactory.getTasks().then(
                 function(data) {
                     ctrl.taskList = data;
                 },
