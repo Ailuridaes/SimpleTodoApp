@@ -10,7 +10,7 @@
     /* @ngInject */
     function taskFactory($http, taskUrl) {
         var service = {
-            getTasks: getTasks($http),
+            getTasks: getTasks,
             addTask: addTask,
             deleteTask: deleteTask,
             updateTask: updateTask
@@ -18,7 +18,7 @@
 
         return service;
 
-        function getTasks($http) {
+        function getTasks() {
             return $http({
                 method: 'GET',
                 url: taskUrl
