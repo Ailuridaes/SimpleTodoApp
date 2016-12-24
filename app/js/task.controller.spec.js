@@ -13,7 +13,7 @@ describe('TaskController', function(){
     sinon.stub(taskFactory, 'getTasks').returns(
       $q.when([{},{},{}]));
     sinon.stub(taskFactory, 'addTask').returns(
-      $q.when({name:"ResponseTask"}));
+      $q.when({title:"ResponseTask"}));
     sinon.stub(taskFactory, 'deleteTask').returns(
       $q.when());
     sinon.stub(taskFactory, 'updateTask').returns(
@@ -42,13 +42,13 @@ describe('TaskController', function(){
 
   describe('after calling addTask', function(){
     it('should have the new response object in the array', function(){
-      var newTask = {name: "NewTask"};
+      var newTask = {title: "NewTask"};
       taskController.addTask(newTask);
 
       $rootScope.$apply();
 
       expect(taskController.taskList.length).toEqual(4);
-      expect(taskController.taskList[taskController.taskList.length-1].name).toEqual('ResponseTask');
+      expect(taskController.taskList[taskController.taskList.length-1].title).toEqual('ResponseTask');
     });
   });
 
@@ -71,7 +71,7 @@ describe('TaskController', function(){
 
     it('should have 3 objects in the array if task parameter not in taskList', function(){
       sandbox.stub(window, 'confirm').returns(true);
-      var task = { name: "todoNotInList" }
+      var task = { title: "todoNotInList" }
       taskController.removeTask(task);
 
       $rootScope.$apply();

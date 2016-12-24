@@ -29,7 +29,7 @@
             <legend>Add Task Item</legend>
             <div class="form-group">
               <label for="formName">Name</label>
-              <input id="formName" ng-model="ctrl.newTask.name" type="text" class="form-control" placeholder="Task name" required>
+              <input id="formName" ng-model="ctrl.newTask.title" type="text" class="form-control" placeholder="Task title" required>
             </div>
             <div class="form-group">
               <label for="formPriority">Priority</label>
@@ -62,10 +62,10 @@
             'btn-primary': true
           }" ng-click="ctrl.orderTasks('-priority')">Sort by lowest priority</button>
           <button ng-class="{
-            'active': sortProperty==='name',
+            'active': sortProperty==='title',
             'btn': true,
             'btn-primary': true
-          }" ng-click="ctrl.orderTasks('name')">Sort by name</button>
+          }" ng-click="ctrl.orderTasks('title')">Sort by title</button>
         </div>
 
         <!-- Task items -->
@@ -79,9 +79,9 @@
               }]">
               <span data-as-sortable-item-handle class="glyphicon glyphicon-menu-hamburger pull-left" aria-hidden="true"></span>
               <span ng-hide="task.isEditMode" ng-click="task.isExpanded = !task.isExpanded">
-                {{task.name}}
+                {{task.title}}
               </span>
-              <input ng-show="task.isEditMode" ng-model="task.name" type="text" required>
+              <input ng-show="task.isEditMode" ng-model="task.title" type="text" required>
               <!-- Complete button -->
               <span type="button" class="glyphicon glyphicon-ok clickable pull-right" ng-hide="task.isCompleted" ng-click="ctrl.completeTask(task)" aria-label="Complete"></span>
               <span type="button" class="glyphicon glyphicon-repeat clickable pull-right" ng-show="task.isCompleted" ng-click="ctrl.completeTask(task, true)" aria-label="UndoComplete"></span>
@@ -94,7 +94,7 @@
                 aria-label="Edit"></span>
               <!-- Save button -->
               <span type="button" class="glyphicon glyphicon-floppy-disk clickable pull-right"
-                ng-show="task.isEditMode && task.name.length"
+                ng-show="task.isEditMode && task.title.length"
                 ng-click="ctrl.updateTask(task); task.isEditMode = false"
                 aria-label="Save"></span>
             </div>
@@ -124,7 +124,9 @@
   <!-- inject:js -->
   <script src="js/app.js"></script>
   <script src="js/task.controller.js"></script>
+  <script src="js/task.controller.spec.js"></script>
   <script src="js/task.factory.js"></script>
+  <script src="js/task.factory.spec.js"></script>
   <script src="js/values.js"></script>
   <!-- endinject -->
 </body>
